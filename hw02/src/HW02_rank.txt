@@ -1,0 +1,57 @@
+2020-03-23 18:31:03
+0    ThreeSum4107056019              stats: Correct                                     time: 0.828943       
+1    ThreeSum4107056042              stats: Correct                                     time: 0.861323       
+2    ThreeSum4107056003              stats: Correct                                     time: 0.958326       
+3    ThreeSum4107061142              stats: Correct                                     time: 0.972529       
+4    ThreeSum4107056002              stats: Correct                                     time: 0.973263       
+5    ThreeSum4107056004              stats: Correct                                     time: 0.988380       
+6    ThreeSum4107056008              stats: Correct                                     time: 0.999342       
+7    ThreeSum4107056010              stats: Correct                                     time: 1.011532       
+8    ThreeSum4107056005              stats: Correct                                     time: 1.031686       
+9    ThreeSum7108056219              stats: Correct                                     time: 1.038072       
+10   ThreeSum4107056032              stats: Correct                                     time: 1.044584       
+11   ThreeSum4107056011              stats: Correct                                     time: 1.050393       
+12   ThreeSum4105061037              stats: Correct                                     time: 1.062118       
+13   ThreeSum4103012038              stats: Correct                                     time: 1.070735       
+14   ThreeSum4107056037              stats: Correct                                     time: 1.075641       
+15   ThreeSum4105030219              stats: Correct                                     time: 1.104276       
+16   ThreeSum7108056089              stats: Correct                                     time: 1.116704       
+17   ThreeSum4106056040              stats: Correct                                     time: 1.131318       
+18   ThreeSum4107056017              stats: Correct                                     time: 1.156796       
+19   ThreeSum4108056020              stats: Correct                                     time: 1.171261       
+20   ThreeSum4107062045              stats: Correct                                     time: 1.172005       
+21   ThreeSum4106053013              stats: Correct                                     time: 1.211749       
+22   ThreeSum4105053126              stats: Correct                                     time: 1.222785       
+23   ThreeSum4106056012              stats: Correct                                     time: 1.258588       
+24   ThreeSum4106053106              stats: Correct                                     time: 1.318515       
+25   ThreeSum4107053032              stats: Correct                                     time: 1.378093       
+26   ThreeSum7108056084              stats: Correct                                     time: 1.396136       
+27   ThreeSum4107056029              stats: Correct                                     time: 1.409802       
+28   ThreeSum4107056007              stats: Correct                                     time: 1.535112       
+29   ThreeSum4106056029              stats: Correct                                     time: 1.571652       
+30   ThreeSum4107056018              stats: Correct                                     time: 1.585319       
+31   ThreeSum4107056006              stats: Correct                                     time: 1.585377       
+32   ThreeSum4106053002              stats: Correct                                     time: 1.611573       
+33   ThreeSum4107056016              stats: Correct                                     time: 1.643884       
+34   ThreeSum4106053139              stats: Correct                                     time: 1.654033       
+35   ThreeSum4107056030              stats: Correct                                     time: 1.669050       
+36   ThreeSum4107056035              stats: Correct                                     time: 1.682458       
+37   ThreeSum4107056015              stats: Correct                                     time: 1.690397       
+38   ThreeSum7108056022              stats: Correct                                     time: 1.691721       
+39   ThreeSum4105062052              stats: Correct                                     time: 1.828908       
+40   ThreeSum4107056001              stats: Correct                                     time: 2.048344       
+41   ThreeSum4104052115              stats: Correct                                     time: 2.897372       
+42   ThreeSum4105061116              stats: Correct                                     time: 6.849677       
+43   ThreeSum4105056012              stats: Correct                                     time: 9.426152       
+44   ThreeSum4105064002              stats: Error: function T_sum() Wrong Answer.       time: 0.000000       
+45   ThreeSum4106056013              stats: Error: function T_sum() Wrong Answer.       time: 0.000000       
+46   ThreeSum4106053136              stats: Error: compiler error.                      time: 0.000000       
+47   ThreeSum4107056025              stats: Error: compiler error.                      time: 0.000000       
+48   ThreeSum4107056040              stats: Error: compiler error.                      time: 0.000000       
+49   ThreeSum4106053040              stats: error	                                      time: 0.000000       
+50   ThreeSum4107053020              stats: Error: function T_sum() Wrong Answer.       time: 0.000000       
+51   ThreeSum4106030213              stats: Error: No Such Method Exception.            time: 0.000000       
+52   ThreeSum4107056027              stats: Error: function T_sum() Wrong Answer.       time: 0.000000       
+53   ThreeSum7108056126              stats: using lib line : import java.util.Arrays;
+	  time: 0.000000       
+54   ThreeSum7108056029              stats: Error: function T_sum() Wrong Answer.       time: 0.000000       
