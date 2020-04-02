@@ -1,12 +1,40 @@
 public class IslandCounting4107056006 extends IslandCounting{
-
+	private int pos;
+	private HashMap map;
+	private int[] tree;
+	public IslandCounting4107056006() {
+		pos = 0;
+		map = new HashMap(4096);
+	}
 	@Override
 	public int count(String[] A, String[] B) {
 		// TODO Auto-generated method stub
-		int pos = 0;
-		HashMap map = new HashMap(4096);
+		tree = new int[A.length];
+		for(int i=0;i<A.length;i++) {
+			int a,b;
+			a = map.get(A[i]);
+			b = map.get(B[i]);
+			if(a==-1) {
+				a = pos;
+				map.put(A[i],pos++);
+			}
+			if(b==-1) {
+				b = pos;
+				map.put(B[i],pos++);
+			}
+			union(a,b);
+		}
+		return findroot();
+	}
+	private void union(int a,int b) {
 		
-		return 0;
+	}
+	private int findroot() {
+		int count = 0;
+		for(int i=0;i<tree.length;i++) {
+			if(tree[i]==i) count++;
+		}
+		return count;
 	}
 }
 class HashMap{
