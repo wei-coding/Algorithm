@@ -3,13 +3,13 @@ public class IslandCounting4107056006 extends IslandCounting{
 	private HashMap map;
 	private int[] tree;
 	public IslandCounting4107056006() {
-		pos = 0;
+		pos = 1;
 		map = new HashMap(4096);
 	}
 	@Override
 	public int count(String[] A, String[] B) {
 		// TODO Auto-generated method stub
-		tree = new int[A.length];
+		tree = new int[A.length+B.length+1];
 		for(int i=0;i<A.length;i++) {
 			int a,b;
 			a = map.get(A[i]);
@@ -22,17 +22,31 @@ public class IslandCounting4107056006 extends IslandCounting{
 				b = pos;
 				map.put(B[i],pos++);
 			}
-			union(a,b);
+			this.union(a,b);
 		}
-		return findroot();
+		return this.findroot();
 	}
 	private void union(int a,int b) {
-		
+		int aroot = this.find(a);
+		int broot = this.find(b);
+		if(aroot>broot) { //aroot size is smaller than broot
+			tree[aroot] = broot;
+			tree[broot]--;
+		}else if(aroot<broot){
+			tree[broot] = aroot;
+			tree[aroot]--;
+		}
+	}
+	private int find(int i) {
+		while(i!=0 && tree[i]>0) {
+			i = tree[i];
+		}
+		return i;
 	}
 	private int findroot() {
 		int count = 0;
 		for(int i=0;i<tree.length;i++) {
-			if(tree[i]==i) count++;
+			if(tree[i]<0) count++;
 		}
 		return count;
 	}
@@ -78,6 +92,7 @@ class LinkedList{
 	}
 	public int get(String s) {
 		Node temp = first;
+		if(temp==null) return -1;
 		for(;temp.next!=null&&temp.s!=s;temp=temp.next);
 		if(temp.s!=s) return -1;
 		else return temp.data;

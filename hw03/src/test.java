@@ -3,11 +3,10 @@ public class test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		HashMap hm = new HashMap(16);
-		hm.put("AAA", 5);
-		hm.put("BB", 8);
-		System.out.println(hm.get("AAA"));
-		System.out.println(hm.get("BB"));
+		IslandCounting4107056006 obj = new IslandCounting4107056006();
+		String[] A = {"A","A","B","D","F","G","H","B"};
+		String[] B = {"B","C","C","E","E","E","D","I"};
+		System.out.println(obj.count(A, B));
 	}
 
 }
