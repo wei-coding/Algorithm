@@ -10,6 +10,9 @@ public class IslandCounting4107056006 extends IslandCounting{
 	public int count(String[] A, String[] B) {
 		// TODO Auto-generated method stub
 		tree = new int[A.length+B.length+1];
+		for(int i=0;i<tree.length;i++) {
+			tree[i] = -1;
+		}
 		for(int i=0;i<A.length;i++) {
 			int a,b;
 			a = map.get(A[i]);
@@ -24,17 +27,21 @@ public class IslandCounting4107056006 extends IslandCounting{
 			}
 			this.union(a,b);
 		}
+		for(int i=1;i<pos;i++) {
+			System.out.println("tree["+i+"]="+tree[i]);
+		}
 		return this.findroot();
 	}
 	private void union(int a,int b) {
 		int aroot = this.find(a);
 		int broot = this.find(b);
 		if(aroot>broot) { //aroot size is smaller than broot
+			tree[broot]+=tree[aroot];
 			tree[aroot] = broot;
-			tree[broot]--;
 		}else if(aroot<broot){
+			tree[aroot]+=tree[broot];
 			tree[broot] = aroot;
-			tree[aroot]--;
+			
 		}
 	}
 	private int find(int i) {
@@ -45,7 +52,7 @@ public class IslandCounting4107056006 extends IslandCounting{
 	}
 	private int findroot() {
 		int count = 0;
-		for(int i=0;i<tree.length;i++) {
+		for(int i=1;i<this.pos;i++) {
 			if(tree[i]<0) count++;
 		}
 		return count;
