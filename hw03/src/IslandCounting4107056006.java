@@ -16,32 +16,31 @@ public class IslandCounting4107056006 extends IslandCounting{
 		for(int i=0;i<A.length;i++) {
 			int a,b;
 			a = map.get(A[i]);
-			b = map.get(B[i]);
 			if(a==-1) {
 				a = pos;
 				map.put(A[i],pos++);
 			}
+			b = map.get(B[i]);
 			if(b==-1) {
 				b = pos;
 				map.put(B[i],pos++);
 			}
-			this.union(a,b);
+			union(a,b);
 		}
 		for(int i=1;i<pos;i++) {
-			System.out.println("tree["+i+"]="+tree[i]);
+			System.out.println("tree["+i+"] = "+tree[i]);
 		}
-		return this.findroot();
+		return findroot();
 	}
 	private void union(int a,int b) {
-		int aroot = this.find(a);
-		int broot = this.find(b);
+		int aroot = find(a);
+		int broot = find(b);
 		if(aroot>broot) { //aroot size is smaller than broot
 			tree[broot]+=tree[aroot];
 			tree[aroot] = broot;
 		}else if(aroot<broot){
 			tree[aroot]+=tree[broot];
 			tree[broot] = aroot;
-			
 		}
 	}
 	private int find(int i) {
