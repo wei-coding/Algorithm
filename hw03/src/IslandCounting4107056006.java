@@ -4,7 +4,7 @@ public class IslandCounting4107056006 extends IslandCounting{
 	private int[] tree;
 	public IslandCounting4107056006() {
 		pos = 1;
-		map = new HashMap(4096);
+		map = new HashMap(1048576);
 	}
 	@Override
 	public int count(String[] A, String[] B) {
@@ -15,6 +15,7 @@ public class IslandCounting4107056006 extends IslandCounting{
 		}
 		for(int i=0;i<A.length;i++) {
 			int a,b;
+			//System.out.println(pos);
 			a = map.get(A[i]);
 			if(a==-1) {
 				a = pos;
@@ -27,27 +28,30 @@ public class IslandCounting4107056006 extends IslandCounting{
 			}
 			union(a,b);
 		}
-		for(int i=1;i<pos;i++) {
-			System.out.println("tree["+i+"] = "+tree[i]);
-		}
 		return findroot();
 	}
 	private void union(int a,int b) {
 		int aroot = find(a);
 		int broot = find(b);
-		if(aroot>broot) { //aroot size is smaller than broot
-			tree[broot]+=tree[aroot];
+		int temp = tree[aroot] + tree[broot];
+		if(aroot==broot) return;
+		if(tree[aroot]>tree[broot]) { //aroot size is smaller than broot
 			tree[aroot] = broot;
-		}else if(aroot<broot){
-			tree[aroot]+=tree[broot];
+			tree[broot] = temp;
+		}else{
 			tree[broot] = aroot;
+			tree[aroot] = temp;
 		}
 	}
 	private int find(int i) {
-		while(i!=0 && tree[i]>0) {
-			i = tree[i];
+		int root,trail,lead;
+		for(root = i;tree[root]>0;root=tree[root]);
+		lead = tree[i];
+		for(trail = i; trail!=root ; trail=lead) {
+			lead = tree[trail];
+			tree[trail] = root;
 		}
-		return i;
+		return root;
 	}
 	private int findroot() {
 		int count = 0;
@@ -68,39 +72,40 @@ class HashMap{
 		}
 	}
 	public void put(String k,int v) {
-		map[k.hashCode() & (size-1)].add(k, v);
+		map[abs(k.hashCode()) & (size-1)].add(k, v);
 	}
 	public int get(String k) {
-		return map[k.hashCode() & (size-1)].get(k);
+		return map[abs(k.hashCode()) & (size-1)].get(k);
+	}
+	private int abs(int n) {
+		if(n>0) return n;
+		else return -n;
 	}
 }
 class LinkedList{
-	class Node{
-		String s;
-		int data;
-		Node next;
+	private class Node{
+		public String s;
+		public int data;
+		public Node next;
 		public Node(String s,int data) {
 			this.s = s;
 			this.data = data;
 			this.next = null;
 		}
 	}
-	Node first = null,now = first;
+	private Node first = null;
 	public void add(String s,int data) {
-		if(first==null) {
-			first = new Node(s,data);
-			now = first;
-		}else {
-			Node temp = new Node(s,data);
-			now.next = temp;
-			now = temp;
-		}
+		Node temp = new Node(s,data);
+		temp.next = first;
+		first = temp;
 	}
 	public int get(String s) {
 		Node temp = first;
 		if(temp==null) return -1;
-		for(;temp.next!=null&&temp.s!=s;temp=temp.next);
-		if(temp.s!=s) return -1;
+		while(temp.next!=null&&!temp.s.equals(s)) {
+			temp = temp.next;
+		}
+		if(!temp.s.equals(s)) return -1;
 		else return temp.data;
 	}
 }
