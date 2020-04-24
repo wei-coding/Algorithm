@@ -1,3 +1,5 @@
-﻿hw03/src/StopWatch.java
-hw03/src/test.java
-hw03/.settings/org.eclipse.core.resources.prefs
+﻿StopWatch.java
+test.java
+hw*/.settings
+*.class
+

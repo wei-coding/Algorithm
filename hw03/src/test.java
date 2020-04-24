@@ -27,7 +27,7 @@ public class test {
         }
 		System.out.println("Data writing finish.");
 		sw.start();
-		IslandCounting4107056006 obj = new IslandCounting4107056006();
+		IslandCounting4107056006_2 obj = new IslandCounting4107056006_2();
 		int ans = obj.count(A2, B2);
 		sw.stop();
 		System.out.println("ans = "+ans+"\ntotal time = "+sw.getDur()+" seconds");

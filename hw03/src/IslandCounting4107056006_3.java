@@ -1,9 +1,8 @@
-public class IslandCounting4107056006 extends IslandCounting{
+public class IslandCounting4107056006_3 extends IslandCounting{
 	private int pos;
 	private HashMap map;
 	private int[] tree;
-	private int[] sz;
-	public IslandCounting4107056006() {
+	public IslandCounting4107056006_3() {
 		pos = 1;
 		map = new HashMap(1048576);
 	}
@@ -11,10 +10,8 @@ public class IslandCounting4107056006 extends IslandCounting{
 	public int count(String[] A, String[] B) {
 		// TODO Auto-generated method stub
 		tree = new int[A.length+B.length+1];
-		sz = new int[A.length+B.length+1];
 		for(int i=0;i<tree.length;i++) {
-			tree[i] = i;
-			sz[i] = 1;
+			tree[i] = -1;
 		}
 		for(int i=0;i<A.length;i++) {
 			int a,b;
@@ -36,19 +33,19 @@ public class IslandCounting4107056006 extends IslandCounting{
 	private void union(int a,int b) {
 		int aroot = find(a);
 		int broot = find(b);
-		int temp = sz[aroot] + sz[broot];
+		int temp = tree[aroot] + tree[broot];
 		if(aroot==broot) return;
-		if(sz[aroot]<sz[broot]) { //aroot size is smaller than broot
+		if(tree[aroot]>tree[broot]) { //aroot size is smaller than broot
 			tree[aroot] = broot;
-			sz[broot] = temp;
+			tree[broot] = temp;
 		}else{
 			tree[broot] = aroot;
-			sz[aroot] = temp;
+			tree[aroot] = temp;
 		}
 	}
 	private int find(int i) {
 		int root,trail,lead;
-		for(root = i;tree[root]!=root;root=tree[tree[root]]);
+		for(root = i;tree[root]>0;root=tree[root]);
 		lead = tree[i];
 		for(trail = i; trail!=root ; trail=lead) {
 			lead = tree[trail];
@@ -59,7 +56,7 @@ public class IslandCounting4107056006 extends IslandCounting{
 	private int findroot() {
 		int count = 0;
 		for(int i=1;i<this.pos;i++) {
-			if(tree[i]==i) count++;
+			if(tree[i]<0) count++;
 		}
 		return count;
 	}
