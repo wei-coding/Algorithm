@@ -18,11 +18,14 @@ public class Test {
 		}*/
 		System.out.println("Data generating finished.");
 		StopWatch s = new StopWatch();
+		int ans;
+		
 		s.start();
 		slash obj = new slash4107056006();
-		int ans = obj.slash_min(A);
+		ans = obj.slash_min(A);
 		s.stop();
-		System.out.printf("ans is %d,calculated ans is %d,used %.6f seconds\n",slash-1,ans,s.getDur());
+		System.out.printf("§Úªº->ans is %d,calculated ans is %d,used %.6f seconds\n",slash-1,ans,s.getDur());
+		
 	}
 
 }
