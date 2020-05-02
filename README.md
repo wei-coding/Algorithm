@@ -87,3 +87,6 @@ public abstract class IslandCounting {
 ![](https://i.imgur.com/xtUuX4S.png)
 
 總之，到現在4/5 21:08 還是沒有修復好，就再等等吧
+
+### 掛掉的伺服器始末
+
