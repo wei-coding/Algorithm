@@ -2,10 +2,10 @@
 public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int size = 100000000;
+		int size = 100000;
 		int[] A = new int[size];
 		int slash = (int)(Math.random()*size);
-		//int slash = 3128069;
+		//int slash = 55;
 		int p=0;
 		for(int i=slash;i<size;i++) {
 			A[p++] = i;

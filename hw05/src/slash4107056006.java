@@ -1,15 +1,20 @@
-public class slash4107056006 extends slash{
+public class slash4107056006 extends slash {
 	@Override
-	public int slash_min(int[] A) {
-		int lo=0,hi=A.length-1,mid=lo+(hi-lo)/2;
-		if(A[lo]<=A[hi]) return -1;
-		while(lo<=hi) {
-			if(A[lo]<=A[mid]) lo=mid+1;
-			if(A[mid]<=A[hi]) hi=mid-1;
-			mid=lo+(hi-lo)/2;
-			if(A[mid-1]>=A[mid]) return A.length-mid-1;
-			if(A[mid]>=A[mid+1]) return A.length-mid-2;
+	public int slash_min(int[] array) {
+		if (array == null || array.length == 0) {
+			return -1;
 		}
-		return -1;
+		int left = 0;
+		int right = array.length - 1;
+		int mid = -1;
+		while (right - left > 1) {
+			mid = (right + left) / 2;
+			if (array[right] < array[mid]) {
+				left = mid;
+			}else {
+				right = mid;
+			}
+		}
+		return array.length-right-1;
 	}
 }
