@@ -55,8 +55,8 @@ public class LSPath4107056006_1 extends LSPath{
 		
 		int max = Integer.MIN_VALUE;
 		for(int i=0;i<distTo.length;i++) {
-			/*if(distTo[i] > max)
-				max = distTo[i];*/
+			if(distTo[i] > max)
+				max = distTo[i];
 			System.out.println("i = "+i+", dist = "+distTo[i]);
 		}
 		
@@ -73,6 +73,7 @@ public class LSPath4107056006_1 extends LSPath{
 			for(int node:adjList.get(v)) {
 				if(!visited[node]) {
 					visited[node] = true;
+					q.push(node);
 					edgeTo[node] = v;
 					distTo[node] = distTo[v] + 1;
 				}
