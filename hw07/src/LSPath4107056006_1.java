@@ -1,25 +1,24 @@
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Stack;
+
 public class LSPath4107056006_1 extends LSPath{
 	private ArrayList<ArrayList<Integer>> adjList;
-	private Queue q;
+	private HashMap hmap;
 	private boolean[] visited;
 	private int[] distTo;
-	private int[] edgeTo;
-	public LSPath4107056006_1() {
-		q = new Queue();
-	}
+	private Timer timer;
 	@Override
 	public int Ans(int[][] array) {
 		// TODO Auto-generated method stub
-		
-		adjList = new ArrayList<ArrayList<Integer>>(array.length);
-		
+		timer = new Timer();
+		hmap = new HashMap(array.length);
+		adjList = new ArrayList<ArrayList<Integer>>();
 		//create adjList for the graph
 		for(int i=0;i<array.length;i++) {
+			timer.start();
 			ensureCapaticy(adjList,array[i][0]);
 			ensureCapaticy(adjList,array[i][1]);
+			timer.stop();
 			if(adjList.get(array[i][0])==null) {
 				ArrayList<Integer> temp = new ArrayList<Integer>();
 				temp.add(array[i][1]);
@@ -36,74 +35,146 @@ public class LSPath4107056006_1 extends LSPath{
 				if(!adjList.get(array[i][1]).contains(array[i][0]))
 					adjList.get(array[i][1]).add(array[i][0]);
 			}
+			
 		}
 		
-		visited = new boolean[adjList.size()];
-		distTo = new int [adjList.size()];
-		edgeTo = new int [adjList.size()];
 		
-		
-		int minNode = -1;
-		int minSize = Integer.MAX_VALUE;
+		int maxNode = -1;
+		int maxSize = Integer.MIN_VALUE;
 		for(int i=0;i<adjList.size();i++) {
-			if(adjList.get(i).size()<minSize) {
-				minSize = adjList.get(i).size();
-				minNode = i;
+			if(adjList.get(i)!=null && adjList.get(i).size()>maxSize) {
+				maxSize = adjList.get(i).size();
+				maxNode = i;
 			}
 		}
-		
-		bfs(minNode);
-		
+		int k = 4;
+		int v = maxNode;
 		int max = Integer.MIN_VALUE;
-		for(int i=0;i<distTo.length;i++) {
-			if(distTo[i] > max)
-				max = distTo[i];
-			System.out.println("i = "+i+", dist = "+distTo[i]);
+		for(int i=0;i<k;i++) {
+			visited = new boolean[adjList.size()];
+			distTo = new int [adjList.size()];
+			
+			bfs(v);
+			
+			for(int j=0;j<distTo.length;j++) {
+				if(distTo[j] > max) {
+					max = distTo[j];
+					v = j;
+				}
+			}
+			//System.out.println("Max is "+max);
 		}
-		
-		
 		
 		return max;
 	}
 	public void bfs(int s) {
-		q.push(s);
+		Queue q = new CircularQueue(adjList.size());
+		q.add(s);
 		visited[s] = true;
 		distTo[s] = 0;
 		while(!q.isEmpty()) {
-			int v = q.pop();
+			int v = q.remove();
+			//System.out.println("v = "+v);
 			for(int node:adjList.get(v)) {
 				if(!visited[node]) {
+					//System.out.println("node = "+node);
+					q.add(node);
 					visited[node] = true;
-					q.push(node);
-					edgeTo[node] = v;
 					distTo[node] = distTo[v] + 1;
 				}
 			}
 		}
 	}
-	public void ensureCapaticy(ArrayList arr,int size) {
+	public <T> void ensureCapaticy(ArrayList<T> arr,int size) {
 		arr.ensureCapacity(size);
 		while(arr.size()<=size) {
 			arr.add(null);
 		}
 	}
 	class Queue{
-		private ArrayList<Integer> queue;
-		private int p = 0;
-		public Queue() {
-			queue = new ArrayList<Integer>();
+		protected int[] queue;
+		protected int size;
+		protected int front = -1;
+		protected int rear = -1;
+		public Queue(int size) {
+			queue = new int[size];
+			this.size = size;
 		}
-		public void push(int x) {
-			queue.add(x);
-			p++;
+		public void add(int x) {
+			queue[++rear] = x;
 		}
-		public int pop() {
-			int t = queue.get(--p);
-			queue.remove(p);
-			return t;
+		public int remove() {
+			return queue[++front];
 		}
 		public boolean isEmpty() {
-			return queue.isEmpty();
+			return front==rear;
+		}
+		public boolean isFull() {
+			return rear == size - 1;
+		}
+	}
+	class CircularQueue extends Queue{
+		public CircularQueue(int size) {
+			super(size);
+		}
+		public void add(int x) {
+			rear = (rear+1)%size;
+			queue[rear] = x;
+		}
+		public int remove() {
+			front = (front+1)%size;
+			return queue[front];
+		}
+		public boolean isFull() {
+			return (rear+1)%size == front;
+		}
+	}
+	class HashMap{
+		private LinkedList[] map;
+		int size;
+		public HashMap(int size) {
+			this.size = size;
+			map = new LinkedList[size];
+			for(int i=0;i<size;i++) {
+				map[i] = new LinkedList();
+			}
+		}
+		public void put(int k,int v) {
+			map[abs(Integer.hashCode(k)) & (size-1)].add(k, v);
+		}
+		public int get(int k) {
+			return map[abs(Integer.hashCode(k)) & (size-1)].get(k);
+		}
+		private int abs(int n) {
+			if(n>0) return n;
+			else return -n;
+		}
+	}
+	class LinkedList{
+		private class Node{
+			public int s;
+			public int data;
+			public Node next;
+			public Node(int s,int data) {
+				this.s = s;
+				this.data = data;
+				this.next = null;
+			}
+		}
+		private Node first = null;
+		public void add(int s,int data) {
+			Node temp = new Node(s,data);
+			temp.next = first;
+			first = temp;
+		}
+		public int get(int s) {
+			Node temp = first;
+			if(temp==null) return -1;
+			while(temp.next!=null && temp.s != s) {
+				temp = temp.next;
+			}
+			if(temp.s!=s) return -1;
+			else return temp.data;
 		}
 	}
 }

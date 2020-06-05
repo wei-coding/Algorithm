@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -5,9 +6,32 @@ public class TestDriver {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		ArrayList<ArrayList<Integer>> arr = new ArrayList<ArrayList<Integer>>();
+		
+		//Reading file
+		int[][] array = usingTestData("test_data.txt");
+		
+		Timer timer = new Timer();
+		timer.start();
+		
 		LSPath entity1 = new LSPath4107056006_1();
-		BufferedReader bfr = new BufferedReader(new FileReader("C:\\Users\\User\\git\\Algorithm\\hw07\\data\\testdata1.txt"));
+		int ans = entity1.Ans(array);
+		
+		double dur = timer.stop();
+		
+		System.out.println("ans is: "+ans+" ,takes "+dur+" seconds.");
+		
+		timer.start();
+		
+		LSPath entity2 = new LSPath4107056006_2();
+		ans = entity2.Ans(array);
+		
+		dur = timer.stop();
+		
+		System.out.println("ans is: "+ans+" ,takes "+dur+" seconds.");
+	}
+	public static int[][] usingTestData(String path) throws IOException {
+		ArrayList<ArrayList<Integer>> arr = new ArrayList<ArrayList<Integer>>();
+		BufferedReader bfr = new BufferedReader(new FileReader("C:\\Users\\User\\git\\Algorithm\\hw07\\data\\"+path));
 		while(bfr.ready()) {
 			String t = bfr.readLine();
 			Scanner scn = new Scanner(t);
@@ -16,8 +40,6 @@ public class TestDriver {
 			arr.add(temp);
 		}
 		int[][] array = arr.stream().map(  u  ->  u.stream().mapToInt(i->i).toArray()  ).toArray(int[][]::new);
-		int ans = entity1.Ans(array);
-		System.out.println("ans is:"+ans);
+		return array;
 	}
-
 }
