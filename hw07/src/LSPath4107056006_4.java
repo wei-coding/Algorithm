@@ -1,26 +1,18 @@
 
-import java.util.ArrayList;
-
-public class LSPath4107056006_1 extends LSPath{
-	private ArrayList<ArrayList<Integer>> adjList;
-	private HashMap hmap;
+public class LSPath4107056006_4 extends LSPath{
+	private ArrayList adjList;
 	private boolean[] visited;
 	private int[] distTo;
-	private Timer timer;
 	@Override
 	public int Ans(int[][] array) {
 		// TODO Auto-generated method stub
-		timer = new Timer();
-		hmap = new HashMap(array.length);
-		adjList = new ArrayList<ArrayList<Integer>>();
+		adjList = new ArrayList();
 		//create adjList for the graph
 		for(int i=0;i<array.length;i++) {
-			timer.start();
-			ensureCapaticy(adjList,array[i][0]);
-			ensureCapaticy(adjList,array[i][1]);
-			timer.stop();
+			adjList.ensureCapaticy(array[i][0]);
+			adjList.ensureCapaticy(array[i][1]);
 			if(adjList.get(array[i][0])==null) {
-				ArrayList<Integer> temp = new ArrayList<Integer>();
+				innerArrayList temp = new innerArrayList();
 				temp.add(array[i][1]);
 				adjList.set(array[i][0],temp);
 			}else {
@@ -28,7 +20,7 @@ public class LSPath4107056006_1 extends LSPath{
 					adjList.get(array[i][0]).add(array[i][1]);
 			}
 			if(adjList.get(array[i][1])==null) {
-				ArrayList<Integer> temp = new ArrayList<Integer>();
+				innerArrayList temp = new innerArrayList();
 				temp.add(array[i][0]);
 				adjList.set(array[i][1],temp);
 			}else {
@@ -37,7 +29,6 @@ public class LSPath4107056006_1 extends LSPath{
 			}
 			
 		}
-		
 		
 		int maxNode = -1;
 		int maxSize = Integer.MIN_VALUE;
@@ -75,7 +66,9 @@ public class LSPath4107056006_1 extends LSPath{
 		while(!q.isEmpty()) {
 			int v = q.remove();
 			//System.out.println("v = "+v);
-			for(int node:adjList.get(v)) {
+			innerArrayList t = adjList.get(v);
+			for(int i=0;i<t.size;i++) {
+				int node = t.get(i);
 				if(!visited[node]) {
 					//System.out.println("node = "+node);
 					q.add(node);
@@ -83,12 +76,6 @@ public class LSPath4107056006_1 extends LSPath{
 					distTo[node] = distTo[v] + 1;
 				}
 			}
-		}
-	}
-	public <T> void ensureCapaticy(ArrayList<T> arr,int size) {
-		arr.ensureCapacity(size);
-		while(arr.size()<=size) {
-			arr.add(null);
 		}
 	}
 	class Queue{
@@ -129,52 +116,77 @@ public class LSPath4107056006_1 extends LSPath{
 			return (rear+1)%size == front;
 		}
 	}
-	class HashMap{
-		private LinkedList[] map;
-		int size;
-		public HashMap(int size) {
-			this.size = size;
-			map = new LinkedList[size];
-			for(int i=0;i<size;i++) {
-				map[i] = new LinkedList();
+	class ArrayList{
+		private innerArrayList[] arr;
+		private int size;
+		private int p;
+		public ArrayList() {
+			arr = new innerArrayList[1];
+			size = 1;
+			p = 0;
+		}
+		public void set(int p,innerArrayList x) {
+			ensureCapaticy(p+1);
+			arr[p] = x;
+		}
+		public void add(innerArrayList x) {
+			arr[p++] = x;
+			ensureCapaticy(p+1);
+		}
+		public void ensureCapaticy(int s) {
+			if(s > size) {
+				while(s > size)
+					size = size << 2;
+				innerArrayList[] newarr = new innerArrayList[size];
+				for(int i=0;i<arr.length;i++) {
+					newarr[i] = arr[i];
+				}
+				arr = newarr;
 			}
 		}
-		public void put(int k,int v) {
-			map[abs(Integer.hashCode(k)) & (size-1)].add(k, v);
+		public int size() {
+			return size;
 		}
-		public int get(int k) {
-			return map[abs(Integer.hashCode(k)) & (size-1)].get(k);
-		}
-		private int abs(int n) {
-			if(n>0) return n;
-			else return -n;
+		public innerArrayList get(int p) {
+			return arr[p];
 		}
 	}
-	class LinkedList{
-		private class Node{
-			public int s;
-			public int data;
-			public Node next;
-			public Node(int s,int data) {
-				this.s = s;
-				this.data = data;
-				this.next = null;
-			}
+	class innerArrayList{
+		private int[] arr;
+		private int size;
+		private int p;
+		public innerArrayList() {
+			arr = new int[1];
+			size = 1;
+			p = 0;
 		}
-		private Node first = null;
-		public void add(int s,int data) {
-			Node temp = new Node(s,data);
-			temp.next = first;
-			first = temp;
+		public void add(int x) {
+			arr[p++] = x;
+			ensureCapaticy(p+1);
 		}
-		public int get(int s) {
-			Node temp = first;
-			if(temp==null) return -1;
-			while(temp.next!=null && temp.s != s) {
-				temp = temp.next;
+		public void ensureCapaticy(int s) {
+			if(s > size) {
+				while(s > size)
+					size = size << 1;
+				int[] newarr = new int[size];
+				for(int i=0;i<arr.length;i++) {
+					newarr[i] = arr[i];
+				}
+				arr = newarr;
 			}
-			if(temp.s!=s) return -1;
-			else return temp.data;
+			
+		}
+		public int size() {
+			return size;
+		}
+		public int get(int p) {
+			return arr[p];
+		}
+		public boolean contains(int x) {
+			for(int i=0;i<arr.length;i++) {
+				if(arr[i]==x) return true;
+			}
+			return false;
 		}
 	}
 }

@@ -1,13 +1,13 @@
 
 import java.util.ArrayList;
-public class LSPath4107056006_1 extends LSPath{
+
+public class LSPath4107056006 extends LSPath{
 	private ArrayList<ArrayList<Integer>> adjList;
 	private boolean[] visited;
 	private int[] distTo;
 	@Override
 	public int Ans(int[][] array) {
 		// TODO Auto-generated method stub
-		
 		adjList = new ArrayList<ArrayList<Integer>>();
 		//create adjList for the graph
 		for(int i=0;i<array.length;i++) {
@@ -29,6 +29,7 @@ public class LSPath4107056006_1 extends LSPath{
 				if(!adjList.get(array[i][1]).contains(array[i][0]))
 					adjList.get(array[i][1]).add(array[i][0]);
 			}
+			
 		}
 		
 		int maxNode = -1;
@@ -39,7 +40,7 @@ public class LSPath4107056006_1 extends LSPath{
 				maxNode = i;
 			}
 		}
-		int k = 5;
+		int k = 4;
 		int v = maxNode;
 		int max = Integer.MIN_VALUE;
 		for(int i=0;i<k;i++) {
@@ -56,10 +57,11 @@ public class LSPath4107056006_1 extends LSPath{
 			}
 			//System.out.println("Max is "+max);
 		}
+		
 		return max;
 	}
 	public void bfs(int s) {
-		Queue q = new CircularQueue(adjList.size());
+		CircularQueue q = new CircularQueue(adjList.size());
 		q.add(s);
 		visited[s] = true;
 		distTo[s] = 0;
@@ -82,31 +84,14 @@ public class LSPath4107056006_1 extends LSPath{
 			arr.add(null);
 		}
 	}
-	class Queue{
+	class CircularQueue{
 		protected int[] queue;
 		protected int size;
 		protected int front = -1;
 		protected int rear = -1;
-		public Queue(int size) {
+		public CircularQueue(int size) {
 			queue = new int[size];
 			this.size = size;
-		}
-		public void add(int x) {
-			queue[++rear] = x;
-		}
-		public int remove() {
-			return queue[++front];
-		}
-		public boolean isEmpty() {
-			return front==rear;
-		}
-		public boolean isFull() {
-			return rear == size - 1;
-		}
-	}
-	class CircularQueue extends Queue{
-		public CircularQueue(int size) {
-			super(size);
 		}
 		public void add(int x) {
 			rear = (rear+1)%size;
@@ -115,6 +100,9 @@ public class LSPath4107056006_1 extends LSPath{
 		public int remove() {
 			front = (front+1)%size;
 			return queue[front];
+		}
+		public boolean isEmpty() {
+			return front==rear;
 		}
 		public boolean isFull() {
 			return (rear+1)%size == front;

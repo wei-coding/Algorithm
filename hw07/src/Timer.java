@@ -9,7 +9,7 @@ public class Timer {
 	public double stop() {
 		end = System.nanoTime();
 		dur = (end-run)/1E9;
-		System.out.println("Used "+dur+" second.");
+		//System.out.println("Used "+dur+" second.");
 		return dur;
 	}
 	public double getDur() {

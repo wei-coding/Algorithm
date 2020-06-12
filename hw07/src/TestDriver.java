@@ -28,6 +28,24 @@ public class TestDriver {
 		dur = timer.stop();
 		
 		System.out.println("ans is: "+ans+" ,takes "+dur+" seconds.");
+		
+		timer.start();
+		
+		LSPath entity3 = new LSPath4107056006_3();
+		ans = entity3.Ans(array);
+		
+		dur = timer.stop();
+		
+		System.out.println("ans is: "+ans+" ,takes "+dur+" seconds.");
+		
+		timer.start();
+		
+		LSPath entity4 = new LSPath4107056006_4();
+		ans = entity4.Ans(array);
+		
+		dur = timer.stop();
+		
+		System.out.println("ans is: "+ans+" ,takes "+dur+" seconds.");
 	}
 	public static int[][] usingTestData(String path) throws IOException {
 		ArrayList<ArrayList<Integer>> arr = new ArrayList<ArrayList<Integer>>();
